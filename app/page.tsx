@@ -1,61 +1,104 @@
+import { getSortedPostsData } from '@/lib/posts';
+
 export default function Home() {
-  const designs = [
-    {
-      name: "Brutalist Terminal",
-      path: "/brutalist",
-      description: "Raw, terminal-inspired with monospace fonts and green-on-black aesthetic",
-      color: "bg-black text-green-400 border-green-400"
-    },
-    {
-      name: "Editorial Typography",
-      path: "/editorial",
-      description: "Classic serif fonts with generous whitespace and refined layout",
-      color: "bg-neutral-50 text-neutral-900 border-neutral-300"
-    },
-    {
-      name: "Minimalist Cards",
-      path: "/cards",
-      description: "Clean card-based layout with subtle shadows and modern spacing",
-      color: "bg-gray-50 text-gray-900 border-gray-300"
-    },
-    {
-      name: "Neo-Minimalist",
-      path: "/neo",
-      description: "Contemporary design with subtle gradients and refined typography",
-      color: "bg-gradient-to-br from-slate-50 to-blue-50 text-slate-900 border-slate-300"
-    }
-  ];
+  const posts = getSortedPostsData();
 
   return (
-    <div className="min-h-screen bg-white p-8">
-      <div className="max-w-4xl mx-auto">
-        <header className="mb-16 text-center">
-          <h1 className="text-4xl font-light mb-4">Personal Blog Design Options</h1>
-          <p className="text-gray-600">Choose your aesthetic direction</p>
+    <div className="min-h-screen font-mono" style={{ background: 'rgb(var(--bg-primary))', color: 'rgb(var(--text-primary))' }}>
+      {/* Subtle grid background */}
+      <div
+        className="fixed inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'linear-gradient(rgb(var(--text-primary)) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--text-primary)) 1px, transparent 1px)',
+          backgroundSize: '32px 32px',
+          opacity: 'var(--grid-opacity)'
+        }}
+      />
+
+      <div className="relative max-w-4xl mx-auto px-6 py-16">
+        {/* Header */}
+        <header className="mb-20 pb-8" style={{ borderBottom: '1px solid rgb(var(--border-primary))' }}>
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12">
+            {/* Left column */}
+            <div>
+              <h1 className="text-xl font-normal tracking-tight mb-3" style={{ color: 'rgb(var(--text-primary))' }}>
+                Alexander Balaban
+              </h1>
+              <p className="text-xs mb-6" style={{ color: 'rgb(var(--text-tertiary))' }}>
+                Software Engineer • Writer
+              </p>
+              <p className="text-sm leading-relaxed max-w-lg" style={{ color: 'rgb(var(--text-secondary))' }}>
+                Building systems and interfaces. Writing about design, development, and the spaces in between.
+              </p>
+            </div>
+
+            {/* Right column - Links */}
+            <div className="flex flex-col gap-1 text-xs">
+              <a
+                href="https://www.linkedin.com/in/yabalaban/"
+                className="transition-colors px-3 py-1.5 border border-transparent rounded social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                → LinkedIn
+              </a>
+              <a
+                href="https://x.com/yabalaban"
+                className="transition-colors px-3 py-1.5 border border-transparent rounded social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                → X
+              </a>
+              <a
+                href="mailto:hello@garagelabs.xyz"
+                className="transition-colors px-3 py-1.5 border border-transparent rounded social-link"
+              >
+                → Email
+              </a>
+            </div>
+          </div>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {designs.map((design) => (
-            <a
-              key={design.path}
-              href={design.path}
-              className={`${design.color} p-8 rounded-lg border-2 hover:shadow-lg transition-all duration-200 hover:-translate-y-1 group`}
-            >
-              <h2 className="text-2xl font-medium mb-3 group-hover:underline">
-                {design.name}
-              </h2>
-              <p className="text-sm opacity-75">
-                {design.description}
-              </p>
-              <div className="mt-4 text-sm opacity-50">
-                Click to preview →
-              </div>
-            </a>
+        {/* Posts */}
+        <main className="space-y-8">
+          {posts.map((post, index) => (
+            <article key={post.slug} className="group">
+              <a href={`/posts/${post.slug}`} className="block border transition-all duration-200 p-6 post-card">
+                <div className="flex items-start gap-4 mb-3">
+                  <span className="text-xs font-normal tabular-nums" style={{ color: 'rgb(var(--text-tertiary))' }}>
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <div className="flex-1">
+                    <time className="block text-xs mb-2 font-normal" style={{ color: 'rgb(var(--text-tertiary))' }}>
+                      {new Date(post.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit'
+                      }).replace(/\//g, '.')}
+                    </time>
+                    <h2 className="text-base mb-2 transition-colors font-normal post-title">
+                      {post.title}
+                    </h2>
+                    <p className="text-sm leading-relaxed" style={{ color: 'rgb(var(--text-secondary))' }}>
+                      {post.excerpt}
+                    </p>
+                  </div>
+                  <span className="transition-colors text-xs post-arrow">
+                    →
+                  </span>
+                </div>
+              </a>
+            </article>
           ))}
-        </div>
+        </main>
 
-        <footer className="mt-16 text-center text-sm text-gray-500">
-          <p>Each design is fully implemented and ready to customize</p>
+        {/* Footer */}
+        <footer className="mt-20 pt-8" style={{ borderTop: '1px solid rgb(var(--border-primary))' }}>
+          <div className="flex justify-between items-center text-xs" style={{ color: 'rgb(var(--text-tertiary))' }}>
+            <p></p>
+            <p>Alexander Balaban © 2026</p>
+          </div>
         </footer>
       </div>
     </div>
