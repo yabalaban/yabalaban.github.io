@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  // Only use basePath in production (GitHub Pages)
-  basePath: process.env.NODE_ENV === 'production' ? '/yabalaban.github.io' : ''
+  // No basePath needed for user GitHub Pages site (yabalaban.github.io)
+  basePath: ''
 }
 
 module.exports = nextConfig
