@@ -107,7 +107,7 @@ body {
 
 /* Blog post prose styles */
 .prose-custom {
-  font-family: ui-monospace, 'Courier New', monospace;
+  font-family: inherit;
   font-size: 1rem;
   line-height: 1.8;
   color: rgb(var(--text-secondary));
@@ -164,15 +164,17 @@ body {
 }
 
 .prose-custom code {
+  font-family: var(--font-mono), ui-monospace, monospace;
   background: rgb(var(--bg-secondary));
   color: rgb(var(--accent));
   padding: 0.2em 0.4em;
   border-radius: 3px;
-  font-size: 0.9em;
+  font-size: 0.85em;
   border: 1px solid rgb(var(--border-primary));
 }
 
 .prose-custom pre {
+  font-family: var(--font-mono), ui-monospace, monospace;
   background: rgb(var(--bg-tertiary));
   color: rgb(var(--text-secondary));
   padding: 1.5em;
