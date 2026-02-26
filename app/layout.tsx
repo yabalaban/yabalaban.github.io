@@ -16,22 +16,13 @@ export const metadata: Metadata = {
     description: 'Essays and thoughts on design, development, and technology',
     url: 'https://yabalaban.github.io',
     siteName: 'Alexander Balaban',
-    images: [
-      {
-        url: '/api/og',
-        width: 1200,
-        height: 630,
-        alt: 'Alexander Balaban - Blog',
-      },
-    ],
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: 'Alexander Balaban',
     description: 'Essays and thoughts on design, development, and technology',
-    images: ['/api/og'],
   },
 }
 
