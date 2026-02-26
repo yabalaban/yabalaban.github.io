@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { getPostData, getAllPostSlugs } from '@/lib/posts';
 
 // Generate static paths for all posts
@@ -6,6 +7,30 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({
     slug: slug,
   }));
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const post = await getPostData(params.slug);
+  const url = `https://yabalaban.github.io/posts/${params.slug}`;
+
+  return {
+    title: `${post.title} — Alexander Balaban`,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url,
+      type: 'article',
+      publishedTime: post.date,
+      authors: ['Alexander Balaban'],
+      siteName: 'Alexander Balaban',
+    },
+    twitter: {
+      card: 'summary',
+      title: post.title,
+      description: post.excerpt,
+    },
+  };
 }
 
 export default async function Post({ params }: { params: { slug: string } }) {
@@ -23,7 +48,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
         }}
       />
 
-      <div className="relative max-w-3xl mx-auto px-6 py-16">
+      <div className="relative max-w-4xl mx-auto px-6 py-16">
         {/* Back link */}
         <a
           href="/"
@@ -33,11 +58,29 @@ export default async function Post({ params }: { params: { slug: string } }) {
           <span>Back to posts</span>
         </a>
 
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              "headline": postData.title,
+              "description": postData.excerpt,
+              "datePublished": postData.date,
+              "url": `https://yabalaban.github.io/posts/${params.slug}`,
+              "author": {
+                "@type": "Person",
+                "name": "Alexander Balaban",
+                "url": "https://yabalaban.github.io"
+              }
+            })
+          }}
+        />
+
         {/* Article */}
         <article>
           <header className="mb-12 pb-8" style={{ borderBottom: '1px solid rgb(var(--border-primary))' }}>
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-xs" style={{ color: 'rgb(var(--accent))' }}>$</span>
               <time className="text-xs font-normal" style={{ color: 'rgb(var(--text-tertiary))' }}>
                 {new Date(postData.date).toLocaleDateString('en-US', {
                   year: 'numeric',

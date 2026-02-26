@@ -25,10 +25,10 @@ export default function Home() {
                 Alexander Balaban
               </h1>
               <p className="text-xs mb-6" style={{ color: 'rgb(var(--text-tertiary))' }}>
-                Software Engineer • Writer
+                Software Engineer • Proud em-dash user (yes)
               </p>
               <p className="text-sm leading-relaxed max-w-lg" style={{ color: 'rgb(var(--text-secondary))' }}>
-                Building systems and interfaces. Writing about design, development, and the spaces in between.
+                Random thoughts, code snippets, and memes.  
               </p>
             </div>
 
@@ -97,7 +97,7 @@ export default function Home() {
         <footer className="mt-20 pt-8" style={{ borderTop: '1px solid rgb(var(--border-primary))' }}>
           <div className="flex justify-between items-center text-xs" style={{ color: 'rgb(var(--text-tertiary))' }}>
             <p></p>
-            <p>Alexander Balaban © 2026</p>
+            <p>GarageLabs © 2026</p>
           </div>
         </footer>
       </div>

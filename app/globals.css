@@ -9,7 +9,7 @@
   --bg-secondary: 23, 23, 23;
   --bg-tertiary: 10, 10, 10;
   --text-primary: 229, 229, 229;
-  --text-secondary: 163, 163, 163;
+  --text-secondary: 180, 180, 180;
   --text-tertiary: 115, 115, 115;
   --border-primary: 38, 38, 38;
   --border-secondary: 23, 23, 23;
@@ -108,14 +108,16 @@ body {
 /* Blog post prose styles */
 .prose-custom {
   font-family: ui-monospace, 'Courier New', monospace;
-  font-size: 0.9375rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.8;
   color: rgb(var(--text-secondary));
+  letter-spacing: -0.01em;
 }
 
 .prose-custom h1,
 .prose-custom h2,
-.prose-custom h3 {
+.prose-custom h3,
+.prose-custom h4 {
   font-weight: 500;
   color: rgb(var(--text-primary));
   margin-top: 2em;
@@ -126,7 +128,8 @@ body {
 
 .prose-custom h1::before,
 .prose-custom h2::before,
-.prose-custom h3::before {
+.prose-custom h3::before,
+.prose-custom h4::before {
   content: '#';
   position: absolute;
   left: 0;
@@ -137,9 +140,10 @@ body {
 .prose-custom h1 { font-size: 1.5em; line-height: 1.3; }
 .prose-custom h2 { font-size: 1.25em; line-height: 1.4; }
 .prose-custom h3 { font-size: 1.1em; line-height: 1.4; }
+.prose-custom h4 { font-size: 1em; line-height: 1.5; }
 
 .prose-custom p {
-  margin-bottom: 1.25em;
+  margin-bottom: 1.5em;
 }
 
 .prose-custom blockquote {
